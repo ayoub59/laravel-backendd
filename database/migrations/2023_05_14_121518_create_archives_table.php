@@ -13,11 +13,14 @@ class CreateArchivesTable extends Migration
      */
     public function up()
     {
-        Schema::table('archives', function (Blueprint $table) {
-            $table->dropColumn(['first_name', 'last_name']);
+        Schema::create('archives', function (Blueprint $table) {
+            $table->id();
             $table->string('white_name');
             $table->string('black_name');
+            $table->integer('score');
             $table->date('date');
+            $table->string('chess_game');
+            $table->timestamps();
         });
     }
 
@@ -28,10 +31,6 @@ class CreateArchivesTable extends Migration
      */
     public function down()
     {
-        Schema::table('archives', function (Blueprint $table) {
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->dropColumn(['white_name', 'black_name', 'date']);
-        });
+        Schema::dropIfExists('archives');
     }
 }
